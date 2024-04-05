@@ -1,0 +1,21 @@
+# Ignore all files in the .idea folder
+.idea/
+
+# Ignore node_modules directory in Node.js projects
+node_modules/
+
+# Ignore compiled output
+/dist
+/tmp
+/build
+*.class
+*.log
+*.jar
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore environment variable files
+.env
+
