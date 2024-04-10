@@ -5,6 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
     <title>Calculator</title>
     <style>
         body, html {
@@ -85,40 +88,90 @@
             margin: 0.5rem;
             padding: 1rem;
         }
+
+        .screen-text {
+            font-family: "Viga", sans-serif;
+            font-weight: 600;
+            font-style: normal;
+            font-size: 24px;
+            letter-spacing: 1px;
+            margin: 0!important;
+            color: #424769;
+            max-width: 290px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
     </style>
 </head>
 <body>
 <div class="container">
     <div class="calculator-body">
-        <div class="screen-area"></div>
+        <div class="screen-area">
+            <p class="screen-text"></p>
+        </div>
         <div class="actions-area">
-            <button>clear</button>
-            <button>undo last</button>
-            <button>result</button>
+            <button id="delete" onclick="actionClick('delete')">clear</button>
+            <button id="backspace" onclick="actionClick('backspace')">undo last</button>
+            <button id="enter" onclick="actionClick('enter')">result</button>
         </div>
         <div class="number-and-operator-area">
             <div class="numbers-area">
-                <button>9</button>
-                <button>8</button>
-                <button>7</button>
-                <button>6</button>
-                <button>5</button>
-                <button>4</button>
-                <button>3</button>
-                <button>2</button>
-                <button>1</button>
-                <button>0</button>
+                <button id="9">9</button>
+                <button id="8">8</button>
+                <button id="7">7</button>
+                <button id="6">6</button>
+                <button id="5">5</button>
+                <button id="4">4</button>
+                <button id="3">3</button>
+                <button id="2">2</button>
+                <button id="1">1</button>
+                <button id="0">0</button>
             </div>
             <div class="operator-area">
-                <button>multiply</button>
-                <button>divide</button>
-                <button>add</button>
-                <button>minus</button>
+                <button id="multiply">multiply</button>
+                <button id="divide">divide</button>
+                <button id="add">add</button>
+                <button id="minus">minus</button>
             </div>
         </div>
     </div>
 </div>
 <script>
+    const numberButtons = document.querySelectorAll('.numbers-area');
+    const screenText = document.querySelector('.screen-text');
+    numberButtons.forEach(button => {
+       button.addEventListener('click', (event) => {
+          screenText.append(event.target.innerText);
+       });
+    });
+</script>
+<script>
+    function actionClick (id) {
+        switch (id) {
+            case 'delete':
+                screenText.innerText = '';
+                break;
+            case 'backspace':
+                screenText.innerText = screenText.innerText.slice(0, -1);
+                break;
+            case 'enter':
+                screenText.innerText = '42';
+                break;
+            default:
+                screenText.innerText = 'err... maybe 42?'
+                break;
+        }
+    }
+</script>
+<script>
+    const allowedKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '*', '/', 'enter', 'backspace', 'delete'];
+    window.addEventListener('keyup', (event) => {
+        if (allowedKeys.includes(event.key.toLowerCase())){
+            document.getElementById(event.key.toLowerCase()).click();
+        }
+    });
 </script>
 </body>
 </html>
