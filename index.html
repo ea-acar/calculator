@@ -114,30 +114,30 @@
             <p class="screen-text"></p>
         </div>
         <div class="actions-area">
-            <button id="delete" onclick="actionClick('delete')">clear</button>
-            <button id="backspace" onclick="actionClick('backspace')">undo last</button>
-            <button id="enter" onclick="actionClick('enter')">result</button>
+            <button id="delete" onclick="actionClick('delete')" aria-label="Clear all">clear</button>
+            <button id="backspace" onclick="actionClick('backspace')" aria-label="Undo last entry">undo last</button>
+            <button id="enter" onclick="actionClick('enter')" aria-label="Calculate result">result</button>
         </div>
         <div class="number-and-operator-area">
             <div class="numbers-area">
-                <button id="9">9</button>
-                <button id="8">8</button>
-                <button id="7">7</button>
-                <button id="6">6</button>
-                <button id="5">5</button>
-                <button id="4">4</button>
-                <button id="3">3</button>
-                <button id="2">2</button>
-                <button id="1">1</button>
-                <button id="left-parenthesis">(</button>
-                <button id="0">0</button>
-                <button id="right-parenthesis">)</button>
+                <button id="9" aria-label="Number 9">9</button>
+                <button id="8" aria-label="Number 8">8</button>
+                <button id="7" aria-label="Number 7">7</button>
+                <button id="6" aria-label="Number 6">6</button>
+                <button id="5" aria-label="Number 5">5</button>
+                <button id="4" aria-label="Number 4">4</button>
+                <button id="3" aria-label="Number 3">3</button>
+                <button id="2" aria-label="Number 2">2</button>
+                <button id="1" aria-label="Number 1">1</button>
+                <button id="0" aria-label="Number 0">0</button>
+                <button id="left-parenthesis" aria-label="Open parenthesis">(</button>
+                <button id="right-parenthesis" aria-label="Close parenthesis">)</button>
             </div>
             <div class="operator-area">
-                <button id="multiply" onclick="operatorClick('multiply')">multiply</button>
-                <button id="divide" onclick="operatorClick('divide')">divide</button>
-                <button id="add" onclick="operatorClick('add')">add</button>
-                <button id="minus" onclick="operatorClick('minus')">minus</button>
+                <button id="multiply" onclick="operatorClick('multiply')" aria-label="Multiply">multiply</button>
+                <button id="divide" onclick="operatorClick('divide')" aria-label="Divide">divide</button>
+                <button id="add" onclick="operatorClick('add')" aria-label="Add">add</button>
+                <button id="minus" onclick="operatorClick('minus')" aria-label="Minus">minus</button>
             </div>
         </div>
     </div>
