@@ -1,0 +1,93 @@
+body, html {
+    align-items: center;
+    background-color: #fbdcde;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    margin: 0;
+}
+
+button {
+    background-color: #fff8cf;
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    color: #101613;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px;
+    padding: 10px 20px;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(0.8);
+    color: #F2613F;
+}
+
+.hover {
+    transform: scale(0.8);
+    color: #F2613F;
+}
+
+.calculator-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #d1f0f9;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 391px;
+}
+
+.actions-area, .numbers-area, .operator-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.number-and-operator-area {
+    display: flex;
+    gap: 10px;
+}
+
+.numbers-area button {
+    flex: 1 1 10%;
+}
+
+.operator-area button {
+    flex: 1 1 15%;
+}
+
+.screen-area {
+    background-color: #e0e5ec;
+    border-radius: 10px;
+    box-shadow: inset -2px -2px 5px #ffffff, inset 2px 2px 5px #babecc;
+    height: 2rem;
+    margin: 0.5rem;
+    padding: 1rem;
+}
+
+.screen-text {
+    font-family: "Viga", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin: 0 !important;
+    color: #424769;
+    max-width: 290px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
