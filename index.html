@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.3.2/math.min.js"></script>
     <title>Calculator</title>
     <style>
         body, html {
@@ -33,13 +34,14 @@
             transition: transform 0.2s;
         }
 
-        button:active {
-            box-shadow: inset -2px -2px 5px #ffffff, inset 2px 2px 5px #babecc;
-            color: #fdfd96;
-        }
-
         button:hover {
             transform: scale(0.8);
+            color: #F2613F;
+        }
+
+        .hover {
+            transform: scale(0.8);
+            color: #F2613F;
         }
 
         .calculator-body {
@@ -95,7 +97,7 @@
             font-style: normal;
             font-size: 24px;
             letter-spacing: 1px;
-            margin: 0!important;
+            margin: 0 !important;
             color: #424769;
             max-width: 290px;
             overflow: hidden;
@@ -127,28 +129,30 @@
                 <button id="3">3</button>
                 <button id="2">2</button>
                 <button id="1">1</button>
+                <button id="left-parenthesis">(</button>
                 <button id="0">0</button>
+                <button id="right-parenthesis">)</button>
             </div>
             <div class="operator-area">
-                <button id="multiply">multiply</button>
-                <button id="divide">divide</button>
-                <button id="add">add</button>
-                <button id="minus">minus</button>
+                <button id="multiply" onclick="operatorClick('multiply')">multiply</button>
+                <button id="divide" onclick="operatorClick('divide')">divide</button>
+                <button id="add" onclick="operatorClick('add')">add</button>
+                <button id="minus" onclick="operatorClick('minus')">minus</button>
             </div>
         </div>
     </div>
 </div>
 <script>
-    const numberButtons = document.querySelectorAll('.numbers-area');
+    const numberButtons = document.querySelectorAll('.numbers-area button');
     const screenText = document.querySelector('.screen-text');
     numberButtons.forEach(button => {
-       button.addEventListener('click', (event) => {
-          screenText.append(event.target.innerText);
-       });
+        button.addEventListener('click', (event) => {
+            screenText.append(event.target.innerText);
+        });
     });
 </script>
 <script>
-    function actionClick (id) {
+    function actionClick(id) {
         switch (id) {
             case 'delete':
                 screenText.innerText = '';
@@ -157,7 +161,13 @@
                 screenText.innerText = screenText.innerText.slice(0, -1);
                 break;
             case 'enter':
-                screenText.innerText = '42';
+                try {
+                    const expression = screenText.innerText;
+                    const result = math.evaluate(expression);
+                    screenText.innerText = result.toString();
+                } catch (error) {
+                    screenText.innerText = 'Invalid expression';
+                }
                 break;
             default:
                 screenText.innerText = 'err... maybe 42?'
@@ -166,10 +176,59 @@
     }
 </script>
 <script>
-    const allowedKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '*', '/', 'enter', 'backspace', 'delete'];
+    function operatorClick(id) {
+        const lastChar = screenText.innerText.slice(-1);
+        if (screenText.innerText.trim() === '' || (lastChar !== ' ' && ['+', '-', '*', '/'].includes(lastChar))) {
+            return;
+        }
+
+        switch (id) {
+            case 'add':
+                screenText.append(' + ');
+                break;
+            case 'divide':
+                screenText.append(' / ');
+                break;
+            case 'minus':
+                screenText.append(' - ');
+                break;
+            case 'multiply':
+                screenText.append(' * ');
+                break;
+            default:
+                screenText.innerText = 'err... so 42 be it?'
+        }
+    }
+</script>
+<script>
+    const allowedKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '*', '/', '(', ')', 'enter', 'backspace', 'delete'];
+    const keyToIdMap = {
+        '+': 'add',
+        '-': 'minus',
+        '*': 'multiply',
+        '/': 'divide',
+        '(': 'left-parenthesis',
+        ')': 'right-parenthesis',
+    };
+
+    window.addEventListener('keydown', (event) => {
+        if (allowedKeys.includes(event.key.toLowerCase())) {
+            const buttonId = keyToIdMap[event.key] || event.key.toLowerCase();
+            const button = document.getElementById(buttonId);
+            if (button) {
+                button.classList.add('hover');
+            }
+        }
+    });
+
     window.addEventListener('keyup', (event) => {
-        if (allowedKeys.includes(event.key.toLowerCase())){
-            document.getElementById(event.key.toLowerCase()).click();
+        if (allowedKeys.includes(event.key.toLowerCase())) {
+            const buttonId = keyToIdMap[event.key] || event.key.toLowerCase();
+            const button = document.getElementById(buttonId);
+            if (button) {
+                button.classList.remove('hover');
+                button.click();
+            }
         }
     });
 </script>
